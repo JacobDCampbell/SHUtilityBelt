@@ -17,7 +17,7 @@ export logger_LvlDebugInt=50
 export logger_LvlDDebug="ddebug"
 export logger_LvlDDebugInt=60
 
-export logger_Lvl=$(logger_SetLogLevel "$logger_LvlError")
+export logger_Lvl=$logger_LvlErrorInt
 
 logger_GetLogLevel() {
     loggger_LevelInt2Str "$logger_Lvl"
