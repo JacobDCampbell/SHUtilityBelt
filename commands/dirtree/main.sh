@@ -8,7 +8,7 @@ dirPath="$(pwd)"
 showSymlinkTarget="false"
 showHidden="false"
 
-findCmdArgs="-depth 1"
+findCmdArgs="-maxdepth 1"
 indent="  "
 
 tChar="├"
@@ -81,7 +81,8 @@ recursiveTreeBranch() {
     local dirPath="$1"
     local prefix="$2"
 
-    local dirEnts="$(eval "find \"$dirPath\" $findCmdArgs -exec basename {} \;")"
+    cmd="find \"$dirPath\" $findCmdArgs -exec basename {} \;"
+    local dirEnts="$(eval "$cmd")"
     local eCount="$(echo "$dirEnts" | wc -l)"
 
     local i=1
