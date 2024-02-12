@@ -10,9 +10,14 @@
 __AUTHOR__="Jacob Campbell"
 __AUTHOR_EMAIL__="JacobDCampbell@gmail.com"
 
+if [ -L "$0" ]; then
+    scriptRootDir="$(cd "$(dirname "$(readlink "$0")")" && pwd)"
+else
+    scriptRootDir="$(cd "$(dirname "$0")" && pwd)"
+fi
+
 ingressScriptName="main.sh"
 cmdIngress=""
-scriptRootDir="$(cd "$(dirname "$0")" && pwd)"
 libDirName="libs"
 libDirPath="$scriptRootDir/$libDirName"
 cmdDirName="commands"
@@ -69,7 +74,7 @@ parseUserArgs() {
             cmdArgs+=("$1")
             ;;
         --log-level)
-            __ARG__='--log-level'
+            __ARG__='--log-level <LEVEL>'
             __DESC__='Sets the log level.'
             __DESC__='Default: $logLvl'
             logLvl="$(userArg_getValFromArg "$1")"
