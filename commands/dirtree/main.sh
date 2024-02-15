@@ -81,22 +81,20 @@ recursiveTreeBranch() {
     local dirPath="$1"
     local prefix="$2"
 
-    cmd="find \"$dirPath\" $findCmdArgs -exec basename {} \;"
-    local dirEnts="$(eval "$cmd")"
-    local eCount="$(echo "$dirEnts" | wc -l)"
-
+    cmd="find \"$dirPath\" $findCmdArgs -not -wholename '$dirPath' -exec basename {} \; |  sort -fV"
+    local entries="$(eval "$cmd")"
+    local count="$(echo "$entries" | wc -l)"
     local i=1
     while read -r ent; do
         if [ -z "$ent" ]; then continue; fi
-
         entPath="$dirPath/$ent"
 
-        if [ $eCount -eq $i ]; then
+        if [ $count -eq $i ]; then
             key="$lChar$xChar "
-            nextPrefix="$prefix$indent"
+            nextPrefix="$prefix$indent "
         else
             key="$tChar$xChar "
-            nextPrefix=$prefix$yChar$indent
+            nextPrefix="$prefix$yChar$indent"
         fi
 
         if [ -L "$entPath" ] && [ "$showSymlinkTarget" == "true" ]; then
@@ -110,7 +108,7 @@ recursiveTreeBranch() {
         fi
 
         i=$(expr $i + 1)
-    done < <(echo "${dirEnts[@]}")
+    done < <(echo "${entries[@]}")
 }
 
 main "$@"
