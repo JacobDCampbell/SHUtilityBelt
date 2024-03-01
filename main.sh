@@ -73,8 +73,8 @@ parseUserArgs() {
             fi
             cmdArgs+=("$1")
             ;;
-        --log-level)
-            __ARG__='--log-level <LEVEL>'
+        --log-level=*)
+            __ARG__='--log-level=<LEVEL>'
             __DESC__='Sets the log level.'
             __DESC__='Default: $logLvl'
             logLvl="$(userArg_getValFromArg "$1")"

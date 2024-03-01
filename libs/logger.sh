@@ -77,7 +77,7 @@ loggger_LevelInt2Str() {
 }
 
 CRITICAL() {
-    if [ $logger_Lvl -le $logger_LvlCritInt ]; then return; fi
+    if [ $logger_Lvl -lt $logger_LvlCritInt ]; then return; fi
     msg="$1"
     tag="[CRITICAL]"
     printf "%s %s\n" "$tag" "$msg"
@@ -88,14 +88,14 @@ CRIT() {
 }
 
 ERROR() {
-    if [ $logger_Lvl -le $logger_LvlErrorInt ]; then return; fi
+    if [ $logger_Lvl -lt $logger_LvlErrorInt ]; then return; fi
     msg="$1"
     tag="[ERROR   ]"
     printf "%s %s\n" "$tag" "$msg"
 }
 
 WARNING() {
-    if [ $logger_Lvl -le $logger_LvlWarnInt ]; then return; fi
+    if [ $logger_Lvl -lt $logger_LvlWarnInt ]; then return; fi
     msg="$1"
     tag="[WARNING ]"
     printf "%s %s\n" "$tag" "$msg"
@@ -106,21 +106,21 @@ WARN() {
 }
 
 INFO() {
-    if [ $logger_Lvl -le $logger_LvlInfoInt ]; then return; fi
+    if [ $logger_Lvl -lt $logger_LvlInfoInt ]; then return; fi
     msg="$1"
     tag="[INFO    ]"
     printf "%s %s\n" "$tag" "$msg"
 }
 
 DEBUG() {
-    if [ $logger_Lvl -le $logger_LvlDebugInt ]; then return; fi
+    if [ $logger_Lvl -lt $logger_LvlDebugInt ]; then return; fi
     msg="$1"
     tag="[DEBUG   ]"
     printf "%s %s\n" "$tag" "$msg"
 }
 
 DDEBUG() {
-    if [ $logger_Lvl -le $logger_LvlDDebugInt ]; then return; fi
+    if [ $logger_Lvl -lt $logger_LvlDDebugInt ]; then return; fi
     msg="$1"
     tag="[DDEBUG  ]"
     printf "%s %s\n" "$tag" "$msg"
